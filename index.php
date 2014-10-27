@@ -11,9 +11,16 @@ $app = JFactory::getApplication();
     <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
     <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/general.css" type="text/css" />
 
-    <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" data-use="true" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" data-use="true" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/jBootstrap.css" type="text/css" />
     <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/css/bootstrap-theme.min.css" type="text/css" />
     <scropt src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template ?>/js/bootstrap.min.js"></scropt>
+    <script>
+        jQuery(function(){
+            //TODO remove style correct
+            jQuery('link').not('[data-use]').remove();
+        });
+    </script>
 </head>
 <body>
 
@@ -27,50 +34,49 @@ $app = JFactory::getApplication();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="/"><?php echo $app->getCfg('sitename'); ?></a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
+            <?php if($this->countModules('jb-menu')) : ?>
+                <jdoc:include type="modules" name="jb-menu" style="none" />
+            <?php endif; ?>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
 <!--http://likbez-net.ru/razrabotka-shablona-sajta-dlya-joomla-30/155-fajl-templatedetailsxml-urok-3.html-->
 <div class="container">
-    <h1 class="navbar-brand"><?php echo $app->getCfg('sitename'); ?></h1>
     <div class="row">
-        <div class="col-md-1">
-            <?php if($this->countModules('jb-left')) : ?>
-                <jdoc:include type="modules" name="jb-left" style="xhtml" />
-            <?php endif; ?>
-        </div>
-        <div class="col-md-10">
+        <h1 class="navbar-brand"><?php echo $app->getCfg('sitename'); ?></h1>
+    </div>
+    <div class="row">
+        <?php if($this->countModules('jb-left')) : ?>
+            <div class="col-md-2">
+                <jdoc:include type="modules" name="jb-left" style="none" />
+            </div>
+        <?php endif; ?>
+        <?php
+            $contentClass = 'col-md-9';
+            if ($this->countModules('jb-left')) {
+                $contentClass = 'col-md-7';
+            }
+        ?>
+        <div class="<?php echo $contentClass; ?>">
             <?php if($this->countModules('jb-top')) : ?>
-                <jdoc:include type="modules" name="jb-top" style="xhtml" />
+                <jdoc:include type="modules" name="jb-top" style="none" />
             <?php endif; ?>
             <jdoc:include type="component" style="xhtml" />
         </div>
-        <div class="col-md-1">
+        <div class="col-md-3">
+            right
             <?php if($this->countModules('jb-right')) : ?>
-                <jdoc:include type="modules" name="jb-right" style="xhtml" />
+                <jdoc:include type="modules" name="jb-right" style="none" />
             <?php endif; ?>
         </div>
-        <?php if($this->countModules('jb-bottom')) : ?>
-            <jdoc:include type="modules" name="jb-bottom" style="xhtml" />
-        <?php endif; ?>
     </div>
+    <?php if($this->countModules('jb-bottom')) : ?>
+        <jdoc:include type="modules" name="jb-bottom" style="none" />
+    <?php endif; ?>
 </div>
 <footer></footer>
 

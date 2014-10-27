@@ -2,7 +2,7 @@
            type="template"
            client="site">
     <name>jBootstrap</name>
-    <version>1.0</version>
+    <version>1.1</version>
     <creationDate>13.10.2014</creationDate>
     <author>jangot</author>
     <authorEmail>pulin.pavel@gmail.com</authorEmail>
@@ -12,12 +12,14 @@
         <folder>css</folder>
         <folder>js</folder>
         <folder>images</folder>
+        <folder>html</folder>
         <filename>index.php</filename>
         <filename>templateDetails.xml</filename>
     </files>
 
     <positions>
         <position>debug</position>
+        <position>jb-menu</position>
         <position>jb-top</position>
         <position>jb-bottom</position>
         <position>jb-left</position>
